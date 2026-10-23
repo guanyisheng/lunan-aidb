@@ -1,0 +1,66 @@
+{
+  "name": "lunan-aidb",
+  "version": "1.0.0-beta",
+  "private": true,
+  "description": "Lunan AIDB — AI-native MySQL/MariaDB desktop IDE with local memory and a database time machine",
+  "author": "路南 <https://github.com/guanyisheng>",
+  "homepage": "https://github.com/guanyisheng/lunan-aidb",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guanyisheng/lunan-aidb.git"
+  },
+  "license": "MIT",
+  "main": "./out/main/index.js",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "electron-vite dev",
+    "start": "electron-vite preview",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "build": "electron-vite build",
+    "build:all": "npm run typecheck && npm run build",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration --testTimeout=180000 --hookTimeout=240000",
+    "smoke": "node scripts/smoke-electron.mjs",
+    "dist:win": "npm run build && TMPDIR=/tmp CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win --x64 --config.directories.output=/tmp/lunan-aidb-dist",
+    "dist:win:dir": "npm run build && TMPDIR=/tmp CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win --dir --config.directories.output=/tmp/lunan-aidb-dist",
+    "dist:mac": "npm run build && TMPDIR=/tmp CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --config.directories.output=/tmp/lunan-aidb-dist",
+    "dist:beta": "npm run build && TMPDIR=/tmp CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --win --x64 --config.directories.output=/tmp/lunan-aidb-dist"
+  },
+  "overrides": {
+    "@codemirror/state": "6.7.6"
+  },
+  "dependencies": {
+    "@codemirror/lang-sql": "6.10.0",
+    "@codemirror/state": "6.7.6",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "codemirror": "6.0.2",
+    "lucide-react": "1.61.0",
+    "mysql2": "3.24.6",
+    "node-sql-parser": "5.4.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "4.6.7",
+    "zustand": "5.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "electron": "45.0.0",
+    "electron-builder": "26.15.3",
+    "electron-vite": "6.0.0",
+    "playwright-core": "1.64.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  }
+}

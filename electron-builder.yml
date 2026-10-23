@@ -1,0 +1,55 @@
+appId: com.lunan.aidb
+productName: Lunan AIDB
+copyright: Copyright © 2026 Lunan AIDB
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**/*
+  - package.json
+  - resources/**/*
+  - '!**/*.{map,md,ts}'
+  - '!**/{test,tests,__tests__}/**'
+  - '!**/._*'
+  - '!**/.DS_Store'
+  - '!**/Thumbs.db'
+asar: true
+asarUnpack:
+  - resources/**
+electronLanguages:
+  - en
+  - zh_CN
+  - zh_TW
+# Prefer PNG; icon.ico provided for Windows when available.
+icon: build/icon.png
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+  artifactName: Lunan-AIDB-${version}-win-${arch}.${ext}
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  shortcutName: Lunan AIDB
+  artifactName: Lunan-AIDB-${version}-win-${arch}.${ext}
+mac:
+  icon: build/icon.icns
+  target:
+    - dmg
+    - zip
+  category: public.app-category.developer-tools
+  hardenedRuntime: true
+  artifactName: Lunan-AIDB-${version}-mac-${arch}.${ext}
+dmg:
+  title: Lunan AIDB ${version}
+  artifactName: Lunan-AIDB-${version}-mac-${arch}.${ext}
+linux:
+  icon: build/icon.png
+  target:
+    - AppImage
+  category: Development
+  artifactName: Lunan-AIDB-${version}-linux-${arch}.${ext}
